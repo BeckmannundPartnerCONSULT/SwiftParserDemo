@@ -1,0 +1,40 @@
+= SwiftParserDemo
+Jens Kötterheinrich <jkh@beckmann-partner.de>
+2018-02-20
+:appversion: 1.0
+:source-highlighter: coderay
+:pdf-page-size: A4
+:lang: de
+:sectnums:
+
+== Beschreibung
+Demo zum Parsen von MT537-Swift-Nachrichten mit WIFE.
+
+*Idee und Umsetzung*: Dr. Ulrich Hofmann
+
+*Anpassungen*: https://github.com/cybi[Jens Kötterheinrich]
+
+== Voraussetzung
+Um die Anwendung starten zu können, wird Java-Version 8 vorausgesetzt.
+
+== Start
+Die Anwendung lässt sich über eine Konsoleneingabe starten:
+----
+java -jar SwiftParserDemo-<Version>-jar-with-dependencies.jar <Dateiname>
+----
+Dazu muss SwiftParserDemo-<Version>-jar-with-dependencies.jar im aktuellen Verzeichnis liegen.
+Der Dateiname kann relativ zum Verzeichnis, in dem SwiftParserDemo-<Version>-jar-with_dependencies.jar
+oder absolut angegeben werden.
+
+== JAR-Datei erzeugen und aufrufen
+Voraussetzung für das Erzeugen der JAR-Datei mit allen Abhängigkeiten ist Maven.
+Dann kann in der Konsoleneingabe mit dem Befehl
+----
+mvn
+----
+die JAR-Datei erzeugt werden.
+Die JAR-Datei liegt anschließend im target-Verzeichnis und kann mit dem Befehl
+----
+java -jar SwiftParserDemo-1.0-SNAPSHOT-jar-with-dependencies.jar ../testdata/MT537.txt
+----
+ausgeführt werden.
