@@ -4,9 +4,9 @@ import com.prowidesoftware.swift.model.SwiftTagListBlock;
 import com.prowidesoftware.swift.model.field.Field;
 import com.prowidesoftware.swift.model.mt.mt5xx.MT537;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -27,13 +27,13 @@ public class ParseUnknownMessageFromFileExample {
 			 * Read the file and create an instance of the generic parser for it Parse from
 			 * File could also be used here
 			 */
-			String msg = readFile(args[0]);
+			String msg = new String(Files.readAllBytes(Paths.get(args[0])));
 
 			// The file contains a set of messages. split em up.
 			String[] splittedMessages = msg.split("\n-}");
 
-			for (int i = 0; i < splittedMessages.length - 1; i++) {
-				MT537 mt = MT537.parse(splittedMessages[i]);
+			for (String message : splittedMessages) {
+				MT537 mt = MT537.parse(message);
 				printHeaderInformation();
 
 				MT537.SequenceA seqA = mt.getSequenceA();
@@ -316,21 +316,6 @@ public class ParseUnknownMessageFromFileExample {
 		} else {
 			System.out.print(";");
 		}
-	}
-
-	private static String readFile(String arg) throws IOException {
-		String msg = "";
-		FileReader reader = new FileReader(arg);
-		BufferedReader inBuffer = new BufferedReader(reader);
-
-		String line = inBuffer.readLine();
-
-		while (line != null) {
-			// System.err.println(line);
-			msg = msg + line + "\n";
-			line = inBuffer.readLine();
-		}
-		return msg;
 	}
 
 	private static boolean checkArguments(String[] args) {
