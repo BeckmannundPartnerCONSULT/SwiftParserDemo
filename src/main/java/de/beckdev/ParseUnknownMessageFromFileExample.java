@@ -1,19 +1,15 @@
 package de.beckdev;
 
+import com.prowidesoftware.swift.model.SwiftTagListBlock;
+import com.prowidesoftware.swift.model.field.Field;
+import com.prowidesoftware.swift.model.mt.mt5xx.MT537;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-
-import com.prowidesoftware.swift.model.SwiftTagListBlock;
-import com.prowidesoftware.swift.model.field.Field;
-import com.prowidesoftware.swift.model.field.Field25D;
-import com.prowidesoftware.swift.model.mt.mt0xx.MT023;
-import com.prowidesoftware.swift.model.mt.mt5xx.MT537;
-import com.prowidesoftware.swift.model.mt.mt5xx.MT537.SequenceA1;
-import com.prowidesoftware.swift.model.mt.mt5xx.MT537.SequenceB;
 
 /**
  * This example shows how to read a SWIFT MT message from a file, in the context

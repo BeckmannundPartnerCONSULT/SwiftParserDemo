@@ -61,7 +61,7 @@
                     <archive>
                         <manifest>
                             <mainClass>
-                                de.beckdev.ParseUnknownMessageFromFileExample2
+                                de.beckdev.ParseUnknownMessageFromFileExample
                             </mainClass></manifest>
                     </archive>
                     <descriptorRefs>
