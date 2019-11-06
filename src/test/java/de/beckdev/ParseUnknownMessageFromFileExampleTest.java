@@ -27,6 +27,6 @@ public class ParseUnknownMessageFromFileExampleTest {
     @Test
     public void test() throws URISyntaxException, IOException {
         String filename = "/MT537.txt";
-        ParseUnknownMessageFromFileExample2.main(new String[]{(Paths.get(getClass().getResource(filename).toURI())).toAbsolutePath().toString()});
+        ParseUnknownMessageFromFileExample.main(new String[]{(Paths.get(getClass().getResource(filename).toURI())).toAbsolutePath().toString()});
     }
 }
