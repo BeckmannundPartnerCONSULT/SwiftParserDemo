@@ -5,6 +5,7 @@ import com.prowidesoftware.swift.model.field.Field;
 import com.prowidesoftware.swift.model.mt.mt5xx.MT537;
 
 import java.io.IOException;
+import java.io.LineNumberReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -23,17 +24,12 @@ public class ParseUnknownMessageFromFileExample {
 
 	public static void main(String[] args) throws IOException {
 		if (checkArguments(args)) {
-			/*
-			 * Read the file and create an instance of the generic parser for it Parse from
-			 * File could also be used here
-			 */
-			String msg = new String(Files.readAllBytes(Paths.get(args[0])));
-
-			// The file contains a set of messages. split em up.
-			String[] splittedMessages = msg.split("\n-}");
-
-			for (String message : splittedMessages) {
-				MT537 mt = MT537.parse(message);
+			String filename = args[0];
+			LineNumberReader reader = new LineNumberReader(Files.newBufferedReader(Paths.get(filename)));
+			String line;
+			while ((line = reader.readLine()) != null && !line.trim().equals("")) {
+				StringBuffer messageBuffer = getMessageFromFile(reader, line);
+				MT537 mt = MT537.parse(messageBuffer.toString());
 				printHeaderInformation();
 
 				MT537.SequenceA seqA = mt.getSequenceA();
@@ -47,6 +43,15 @@ public class ParseUnknownMessageFromFileExample {
 				checkForSequenceC(mt);
 			}
 		}
+	}
+
+	private static StringBuffer getMessageFromFile(LineNumberReader reader, String line) throws IOException {
+		StringBuffer messageBuffer = new StringBuffer(line).append("\n");
+		while (!(line = reader.readLine()).equals("-}")) {
+			messageBuffer.append(line).append("\n");
+		}
+		messageBuffer.append("-}");
+		return messageBuffer;
 	}
 
 	private static void printInformationAboutMessage(MT537.SequenceA seqA, ListIterator<MT537.SequenceB2> seqBi) {
